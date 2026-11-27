@@ -1,0 +1,20 @@
+{
+  "scope": "paywall",
+  "flows": [
+    { "channel": "Meta", "headline": "A year of audiobooks for $99.17 a month", "paywall_opens_on": "Yearly", "note": "7 days free" },
+    { "channel": "Meta", "headline": "Every ride, with a story in your ears", "paywall_opens_on": "Yearly", "note": "7 days free" },
+    { "channel": "Meta", "headline": "Cien años de soledad, read to you tonight", "paywall_opens_on": "Yearly", "note": "7 days free" }
+  ],
+  "today": { "text": "every install meets the same three screens: a plan pitch, annual vs monthly with Monthly ticked, a confirmation with a terms checkbox", "source": "audit_frames" },
+  "prices": { "yearly": "$1,190 MXN", "monthly": "$169 MXN", "trial": "7 days", "source": "Mexican App Store in-app purchases; storytel.com/mx" },
+  "asks": [],
+  "paywall": { "uses_answers": false },
+  "rebuild": "the paywall opens on what the ad promised: the yearly price, a story playing offline, the book they came for",
+  "ideas": [
+    { "n": 1, "title": "Open the paywall on the ad’s promise", "screen": "Storytel Unlimited", "outcome": "CR +15–20%" },
+    { "n": 2, "title": "Put 4.8 from 23K ratings by the button", "screen": "Plans", "outcome": "CR +10–15%" },
+    { "n": 3, "title": "Tick Yearly, the plan with the free week", "screen": "Plans", "outcome": "CR +5–15%" },
+    { "n": 4, "title": "Drop the confirmation screen and its checkbox", "screen": "Plans", "outcome": "CR +5–8%" },
+    { "n": 5, "title": "Say “cancel before the last day, pay nothing” by the button", "screen": "Plans", "outcome": "CR +3–8%" }
+  ]
+}

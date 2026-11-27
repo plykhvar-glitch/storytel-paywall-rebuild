@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta name="color-scheme" content="light">
+<title>Growth Audit — Storytel</title>
+<meta name="description" content="Storytel Unlimited, rebuilt as one paywall that opens on the promise of the ad that brought each person in. A growth audit by Adapty.">
+<link rel="icon" href="img/icon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* Shell: storytel.com — white page, ink #110E11, the orange speech-bubble mark, one accent: Storytel orange #FF5C28.
+   Phone: Storytel as it ships — #FEFCFD screens, orange headlines, black pill buttons, outlined pill chips. */
+:root{
+  color-scheme:only light;
+  --ink:#110E11; --ink-soft:#2A2429; --muted:rgba(17,14,17,.58); --faint:rgba(17,14,17,.2); --line:rgba(17,14,17,.09);
+  --soft:#FFF8F5; --cream:#FFF1EB; --cream2:#FFE3D7; --white:#FFFFFF;
+  --gold:#110E11; --gold-lift:#E8481A; --gold-soft:#FFE3D7; --deep:#110E11; --ylw:#FFD23F;
+  --f:'Inter',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{font-family:var(--f);color:var(--ink-soft);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button,select{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+img,video{display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+@media(max-width:700px){.wrap{padding:0 16px}}
+
+/* ---- top bar ---- */
+.nav{position:sticky;top:0;z-index:50;padding:12px 12px 0}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 10px 0 22px;height:60px;display:flex;align-items:center;gap:14px;background:rgba(238,244,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;box-shadow:0 1px 0 var(--line)}
+@media(max-width:700px){.nav-in{padding:0 8px 0 16px;gap:8px}}
+.logo-st{height:24px;width:auto;flex:none}
+.nav-in .sep{width:1px;height:20px;background:var(--faint)}
+.nav-in .lbl{font-size:14px;color:var(--muted);white-space:nowrap}
+@media(max-width:760px){.nav-in .sep,.nav-in .lbl{display:none}}
+.tabs{margin-left:auto;display:flex;gap:2px}
+.tabs button{height:40px;padding:0 16px;border-radius:999px;font-size:15px;font-weight:600;color:var(--muted)}
+@media(max-width:400px){.tabs button{padding:0 11px;font-size:14px}}
+.tabs button.on{background:var(--white);color:var(--ink);box-shadow:0 1px 3px rgba(30,30,32,.1)}
+.demo{height:44px;padding:0 20px;border-radius:999px;background:var(--ink);color:#fff;font-size:15px;font-weight:600;display:flex;align-items:center;text-decoration:none;white-space:nowrap}
+.demo:hover{background:var(--gold-lift)}
+@media(max-width:560px){.nav .demo{display:none}}
+.view{display:none}.view.on{display:block}
+
+/* ======================= OVERVIEW ======================= */
+/* hero: the deep blue of your Premium cards, with incoming calls being named as they rise */
+.sky{background:#110E11}
+.hero-frame{margin:-72px 12px 0;border-radius:20px;overflow:hidden;position:relative;color:#fff;min-height:720px;display:flex;align-items:flex-end}
+.hero-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,14,17,.96) 0%,rgba(17,14,17,.72) 50%,rgba(17,14,17,.15) 100%);pointer-events:none;z-index:1}
+.rise{position:absolute;right:2%;top:0;bottom:0;width:min(620px,54vw);pointer-events:none;overflow:hidden}
+.rise .ls{position:absolute;width:150px;height:150px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.18);opacity:0;animation:up 21s linear infinite}
+@keyframes up{0%{transform:translateY(780px);opacity:0}8%{opacity:.75}85%{opacity:.75}100%{transform:translateY(-260px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.rise .ls{animation:none;opacity:.35;transform:translateY(calc(var(--k,1) * 160px))}}
+.hero-in{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:end;padding-top:190px;padding-bottom:56px}
+@media(max-width:900px){.hero-frame{min-height:0}.hero-in{grid-template-columns:1fr;padding-top:170px;padding-bottom:36px}}
+.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);font-weight:600}
+.hero h1{font-size:clamp(34px,4.4vw,56px);line-height:1.06;font-weight:800;letter-spacing:-.035em;margin-top:16px;max-width:860px;text-wrap:balance}
+.hero h1 em{font-style:normal;color:#FF5C28}
+.hero .lead{font-size:clamp(17px,1.7vw,19px);line-height:1.55;margin-top:20px;max-width:690px;color:rgba(255,255,255,.9)}
+.cta-row{display:flex;gap:14px;align-items:center;margin-top:28px;flex-wrap:wrap}
+.btn-w{height:50px;padding:0 24px;border-radius:999px;background:#FF5C28;color:#fff;font-size:17px;font-weight:700;display:inline-flex;align-items:center;gap:10px}
+.btn-w:hover{background:#E8481A}
+.btn-o{height:50px;padding:0 22px;border-radius:999px;background:rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;font-size:17px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.btn-o:hover{background:rgba(255,255,255,.26)}
+.byline{margin-top:16px;font-size:14px;color:rgba(255,255,255,.72)}
+.fan{position:relative;height:430px}
+.fan img{position:absolute;width:190px;aspect-ratio:1320/2868;object-fit:cover;object-position:top;border-radius:20px;border:4px solid #fff;box-shadow:0 24px 60px rgba(0,20,110,.45);background:#fff}
+.fan .j{width:84px;height:84px;border-radius:20px;border:0;aspect-ratio:auto;left:40%;bottom:-6px;z-index:4;box-shadow:0 12px 30px rgba(0,20,110,.4)}
+@media(max-width:900px){.fan{height:300px}.fan img{width:130px;border-width:3px;border-radius:14px}.fan .j{width:62px;height:62px;border-radius:15px}}
+
+.stats{margin:12px 12px 0;border-radius:20px;background:var(--cream)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:30px 18px;text-align:center;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-size:38px;font-weight:800;letter-spacing:-.04em;line-height:1.1;color:var(--ink)}
+.stat b i{font-style:normal;color:#FF5C28}
+.stat span{display:block;font-size:14px;color:var(--muted);margin-top:6px;line-height:1.35}
+@media(max-width:800px){.stats .wrap{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3){border-left:0}.stat{border-top:1px solid var(--line)}.stat:nth-child(-n+2){border-top:0}.stat b{font-size:30px}}
+
+.sec{padding:96px 0}
+@media(max-width:700px){.sec{padding:64px 0}}
+.sec-h{font-size:clamp(30px,3.9vw,46px);line-height:1.1;font-weight:800;letter-spacing:-.035em;max-width:940px;color:var(--ink)}
+.sec-h b{font-weight:800;color:var(--muted)}
+.sec-p{font-size:18px;line-height:1.6;color:var(--muted);margin-top:18px;max-width:780px}
+.kick{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-lift);font-weight:700;margin-bottom:14px}
+
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+@media(max-width:860px){.about{grid-template-columns:1fr}}
+.flowp{margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.flowp div{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:var(--ink-soft);line-height:1.45}
+.flowp i{font-style:normal;flex:none;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;margin-top:1px}
+.flowp b{font-weight:700;color:var(--ink)}
+.flowp .k2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:8px}
+.note{background:var(--cream);border-radius:16px;padding:22px 24px}
+.note h4{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;display:flex;gap:10px;align-items:center}
+.note h4 i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px}
+.note p{font-size:15px;color:var(--muted);line-height:1.55}
+.note+.note{margin-top:10px}
+
+/* your ads */
+.entries{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+@media(max-width:860px){.entries{grid-template-columns:1fr}}
+.en{background:var(--cream);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px;text-align:left;cursor:pointer;transition:background .15s}
+.en:hover{background:var(--cream2)}
+.en .pv{height:300px;border-radius:14px;overflow:hidden;position:relative;background:#0A1640}
+.en .pv video,.en .pv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.en .pv img.st{object-position:top}
+.en .pv .lk{position:absolute;left:12px;bottom:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;background:#fff;color:var(--ink);font-size:12.5px;font-weight:700;box-shadow:0 4px 14px rgba(18,24,40,.18)}
+.en .pv .lk i{width:8px;height:8px;border-radius:50%;background:#FF3B30;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.en h4{font-size:19px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.en p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.en p q{color:var(--ink);font-weight:600}
+.en u{font-size:14.5px;font-weight:600;color:var(--ink);text-underline-offset:3px;text-decoration-color:var(--faint)}
+.asa{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--muted)}
+.asa span{background:var(--cream);border-radius:999px;padding:5px 12px;font-weight:600;color:var(--ink-soft)}
+
+/* the five ideas */
+.list{margin-top:40px;display:flex;flex-direction:column;max-width:980px;border-top:1px solid var(--line)}
+.it{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:26px 6px;cursor:pointer;border-bottom:1px solid var(--line);transition:background .2s}
+.it:hover{background:var(--soft)}
+@media(max-width:600px){.it{grid-template-columns:40px 1fr;gap:10px}}
+.it .em{font-size:22px;font-weight:800;color:var(--gold);letter-spacing:-.02em;padding-top:2px}
+.it h3{font-size:21px;font-weight:700;letter-spacing:-.015em;line-height:1.3;color:var(--ink)}
+.it p{font-size:15.5px;color:var(--muted);margin-top:6px;line-height:1.55;max-width:780px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:12px;flex-wrap:wrap}
+.out{display:inline-flex;align-items:baseline;gap:8px;background:var(--gold-soft);color:#0038C7;padding:5px 12px;border-radius:999px;font-weight:700;font-size:14.5px}
+.out small{font-weight:500;font-size:12.5px}
+.see{font-size:14.5px;color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--faint)}
+
+/* the outcome */
+.outc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px}
+@media(max-width:860px){.outc{grid-template-columns:1fr}}
+.osh{position:relative;overflow:hidden;color:#fff;border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;justify-content:flex-end;min-height:520px}
+.osh>.ph{position:absolute;left:50%;top:26px;width:290px;transform:translateX(-50%);border-radius:28px;box-shadow:0 24px 60px rgba(0,20,110,.45)}
+.osh{background:#110E11}.osh::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(17,14,17,.99) 38%,rgba(17,14,17,0) 76%)}
+.osh>*:not(.ph){position:relative;z-index:2}
+.osh .k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.osh h3{font-size:30px;font-weight:800;letter-spacing:-.03em;margin-top:8px;line-height:1.15;max-width:460px}
+.osh .nums{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.osh .nums div{background:rgba(255,255,255,.12);border-radius:16px;padding:14px 20px;min-width:130px}
+.osh .nums b{display:block;font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1;color:#FF5C28}
+.osh .nums span{font-size:13.5px;color:rgba(255,255,255,.85)}
+.osh .cap{font-size:14.5px;color:rgba(255,255,255,.82);margin-top:18px;line-height:1.5;max-width:470px}
+.dos{display:flex;flex-direction:column;gap:12px}
+.do{background:var(--cream);border-radius:20px;padding:24px 26px;flex:1}
+.do .k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-lift);font-weight:700;margin-bottom:6px}
+.do h4{font-size:20px;font-weight:700;letter-spacing:-.015em;color:var(--ink)}
+.do p{font-size:15px;color:var(--muted);margin-top:6px;line-height:1.55}
+.endcta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:40px}
+.btn-k{height:52px;padding:0 26px;border-radius:999px;background:var(--gold);color:#fff;font-size:17px;font-weight:700;display:inline-flex;align-items:center}
+.btn-l{height:52px;padding:0 24px;border-radius:999px;background:var(--cream);color:var(--ink);font-size:17px;font-weight:600;display:inline-flex;align-items:center;text-decoration:none}
+.foot{font-size:13px;color:var(--muted);line-height:1.6;padding:30px 0 60px;border-top:1px solid var(--line);margin-top:36px}
+
+/* ======================= PROTOTYPE VIEW ======================= */
+.pwv{padding-top:48px;padding-bottom:70px}
+.pwv>h1{font-size:clamp(32px,4.4vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.035em;color:var(--ink)}
+.pwv>h1 b{font-weight:800;color:var(--muted)}
+.pwv .sub{font-size:18px;color:var(--muted);margin-top:14px;max-width:860px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;align-items:center}
+.seg{display:inline-flex;background:var(--cream);border-radius:999px;padding:3px}
+.seg button{height:36px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:600;color:var(--muted)}
+.seg button.on{background:var(--white);color:var(--ink);box-shadow:0 1px 3px rgba(30,30,32,.12)}
+.wt{height:42px;padding:0 18px;border-radius:999px;background:var(--ink);color:#fff;font-size:14.5px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.wt.on{background:var(--gold)}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.steps button{height:44px;padding:0 18px;border-radius:999px;background:var(--cream);font-size:15px;font-weight:600;color:var(--ink-soft);transition:all .15s}
+.steps button:hover{background:var(--cream2)}
+.steps button.on{background:var(--ink);color:#fff}
+.steps button.td{background:#fff;box-shadow:inset 0 0 0 1.5px var(--faint);color:var(--muted)}
+.steps button.td.on{background:var(--muted);color:#fff;box-shadow:none}
+.stcap{margin-top:14px;font-size:15.5px;color:var(--muted);min-height:24px;max-width:900px}
+.stcap b{font-weight:700;color:var(--ink)}
+.dcap{margin-top:14px;height:0;overflow:hidden;transition:height .25s}
+.dcap.on{height:58px}
+.dcap-in{display:flex;align-items:center;gap:14px;background:var(--ink);color:#fff;border-radius:16px;padding:0 18px;height:58px;font-size:15px}
+.dcap-in .pr{flex:none;width:120px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
+.dcap-in .pr i{display:block;height:100%;width:0;background:#FF5C28;transition:width .4s}
+.dcap-in span{flex:1}
+@media(max-width:600px){.dcap.on{position:fixed;left:8px;right:8px;bottom:8px;z-index:60;margin:0;height:auto}.dcap-in{height:auto;min-height:58px;padding:10px 14px;font-size:14px}.dcap-in .pr{width:60px}}
+.trio{display:flex;gap:28px;justify-content:center;margin-top:26px;--sc:.8}
+@media(max-width:899px){.trio{justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px 14px;margin-left:-16px;margin-right:-16px;gap:16px;scrollbar-width:none}.trio::-webkit-scrollbar{display:none}}
+.tcol{flex:none;display:flex;flex-direction:column;align-items:center;scroll-snap-align:center}
+.apill{display:flex;align-items:center;gap:8px;height:34px;padding:0 14px 0 6px;border-radius:999px;background:var(--cream);font-size:13.5px;font-weight:600;color:var(--ink-soft);margin-bottom:14px;max-width:calc(390px * var(--sc) + 20px);white-space:nowrap;overflow:hidden}
+.apill .mt{height:24px;padding:0 10px;border-radius:99px;background:var(--ring);color:#fff;font-size:11.5px;display:inline-flex;align-items:center;flex:none}
+.apill .tx{overflow:hidden;text-overflow:ellipsis}
+.pbox{width:calc(390px * var(--sc));height:calc(844px * var(--sc));position:relative}
+.phone{position:absolute;left:0;top:0;width:390px;height:844px;transform:scale(var(--sc));transform-origin:0 0;border-radius:58px;background:#0c0c0c;padding:12px;box-shadow:0 30px 60px rgba(30,30,32,.22),0 0 0 2px #2c2c2c inset}
+.tcol.ring .phone{box-shadow:0 30px 60px rgba(30,30,32,.22),0 0 0 6px var(--ring)}
+.tlab{margin-top:16px;text-align:center;max-width:calc(390px * var(--sc) + 10px);min-height:62px}
+.tlab b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:700}
+.tlab span{display:block;font-size:14px;color:var(--muted);margin-top:4px;line-height:1.45}
+.ans{margin-top:10px;width:calc(390px * var(--sc));background:var(--cream);border-radius:16px;padding:8px;display:grid;grid-template-columns:1.35fr 1fr;gap:6px;text-align:left}
+.ans label{display:flex;flex-direction:column;font-size:10.5px;color:var(--muted);background:var(--white);border-radius:10px;padding:5px 10px 4px;min-width:0}
+.ans select{font-size:13.5px;font-weight:600;color:var(--ink);padding:1px 0;appearance:none;-webkit-appearance:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23777' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") right 2px center no-repeat;width:100%;padding-right:14px;text-overflow:ellipsis}
+.finger{position:absolute;z-index:30;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 0 0 2px rgba(30,30,32,.35),0 6px 18px rgba(0,0,0,.35);pointer-events:none;opacity:0;transition:left .38s var(--ease),top .38s var(--ease),transform .12s,opacity .2s}
+.finger.on{opacity:1}.finger.press{transform:scale(.72)}
+
+.ideas{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:56px}
+@media(max-width:800px){.ideas{grid-template-columns:1fr}}
+.idea{background:var(--cream);border-radius:16px;padding:22px 24px;cursor:pointer;transition:background .15s}
+.idea:hover{background:var(--cream2)}
+.idea:last-child{grid-column:1/-1}
+.idea .n{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-lift);font-weight:700}
+.idea h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-top:4px;line-height:1.3;color:var(--ink)}
+.idea p{font-size:14.5px;color:var(--muted);margin-top:6px;line-height:1.55}
+.idea .kept{font-size:13px;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.qr{position:relative;overflow:hidden;display:flex;gap:26px;align-items:center;color:#fff;border-radius:20px;padding:30px 32px;margin-top:40px;flex-wrap:wrap}
+.qr>*{position:relative;z-index:2}
+.qr .masc{position:absolute;right:170px;top:-30px;width:260px;opacity:.35;z-index:1}
+.qr img.code{width:135px;height:135px;background:#fff;border-radius:12px;image-rendering:pixelated;padding:0}
+.qr h3{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.qr p{font-size:15px;color:rgba(255,255,255,.88);margin-top:4px;max-width:480px}
+.qr .demo{margin-left:auto;background:#FF5C28;color:#fff;height:48px;padding:0 24px;font-size:16px}
+@media(max-width:1080px){.qr img.code,.qr .masc{display:none}}
+@media(max-width:700px){.qr .demo{margin-left:0}}
+
+/* ---- inside the phone: Storytel as it ships. Every internal class is sy- ---- */
+.scr{position:absolute;inset:12px;border-radius:46px;overflow:hidden;color-scheme:only light;
+  --c-bg:#FEFCFD; --c-card:#F4F1F2; --c-card2:#ECE7E9; --c-ink:#110E11; --c-ink2:#3B3539; --c-mute:#7A7377; --c-line:#ECE8EA; --c-btn:#110E11; --c-btnt:#FFFFFF;
+  --c-or:#FF5C28; --c-ylw:#FFD23F; --c-star:#FF5C28; --logo:url(img/logo.svg?v=2);
+  background:var(--c-bg);color:var(--c-ink);font-family:-apple-system,BlinkMacSystemFont,'Inter','Helvetica Neue',sans-serif;display:flex;flex-direction:column}
+.phone.dk .scr{--c-bg:#110E11; --c-card:#1E1A1D; --c-card2:#2A2529; --c-ink:#FEFCFD; --c-ink2:#D7D1D4; --c-mute:#9A9296; --c-line:#2A2529; --c-btn:#FEFCFD; --c-btnt:#110E11; --logo:url(img/logo-w.svg?v=2)}
+.sb{height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 36px;font-size:15px;font-weight:600;font-family:-apple-system,sans-serif;position:relative;z-index:6;color:var(--c-ink)}
+.sb.w{color:#fff}
+.sb .isl{position:absolute;left:50%;top:11px;width:120px;height:34px;margin-left:-60px;background:#000;border-radius:20px}
+.sb .ic{display:flex;gap:5px;align-items:center}
+.scr-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;position:relative}
+.scr-body::-webkit-scrollbar{display:none}
+.scr-foot{flex:none;position:relative;z-index:4}
+.toast{position:absolute;left:50%;bottom:150px;transform:translateX(-50%) translateY(10px);background:rgba(17,14,17,.94);color:#fff;font:600 13px/1.3 -apple-system,'Inter',sans-serif;padding:10px 15px;border-radius:999px;opacity:0;transition:all .25s;pointer-events:none;z-index:40;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.pulse{animation:pulse 1.6s ease-out 2}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,92,40,.95)}100%{box-shadow:0 0 0 16px rgba(255,92,40,0)}}
+.phone.pulse{animation:pring 1.6s ease-out 2}
+@keyframes pring{0%{box-shadow:0 0 0 0 rgba(255,92,40,.9)}100%{box-shadow:0 0 0 26px rgba(255,92,40,0)}}
+.sy-tap{animation:tapme 1.8s ease-out infinite}
+@keyframes tapme{0%{box-shadow:0 0 0 0 rgba(255,92,40,.7)}70%,100%{box-shadow:0 0 0 12px rgba(255,92,40,0)}}
+
+.sy-btn{display:flex;align-items:center;justify-content:center;width:100%;height:52px;border-radius:999px;background:var(--c-btn);color:var(--c-btnt);font:600 16px/1 -apple-system,'Inter',sans-serif}
+.sy-logo{display:block;width:96px;height:20px;background:var(--logo) left center/contain no-repeat}
+.sy-x{width:30px;height:30px;border-radius:50%;background:var(--c-card);display:grid;place-items:center;color:var(--c-ink2)}
+.sy-x svg{width:14px;height:14px}
+.sy-head{display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 16px;flex:none}
+.sy-today{position:absolute;left:12px;right:12px;bottom:110px;z-index:3;border:1.5px dashed rgba(17,14,17,.5);border-radius:12px;padding:9px 11px;text-align:center;font-size:11.5px;line-height:1.5;color:#110E11;background:rgba(255,255,255,.9)}
+.sy-cap{position:relative;flex:1;min-height:0;cursor:pointer;background:#FEFCFD}
+.sy-cap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.sy-cap .tdots{position:absolute;left:0;right:0;top:58px;display:flex;justify-content:center;gap:5px;z-index:3}
+.sy-cap .tdots i{width:6px;height:6px;border-radius:3px;background:rgba(17,14,17,.25)}
+.sy-cap .tdots i.on{width:18px;background:#FF5C28}
+
+/* the paywall (proposed) */
+.sy-pw{display:flex;flex-direction:column;height:100%;background:var(--c-bg)}
+.sy-hero{padding:0 16px}
+.sy-ph{font-size:27px;font-weight:800;letter-spacing:-.025em;line-height:1.1;color:var(--c-or);text-wrap:balance;border-radius:10px;margin-top:4px}
+.sy-sub{font-size:13.5px;color:var(--c-ink2);margin-top:7px;line-height:1.4}
+.sy-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sy-tags span{font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:999px;border:1.5px solid var(--c-line);color:var(--c-ink2)}
+.sy-lead{margin-top:14px;border-radius:20px;position:relative;overflow:hidden}
+.sy-price{background:var(--c-ylw);color:#110E11;padding:16px;border-radius:20px}
+.sy-price .k{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+.sy-price .big{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-top:6px}
+.sy-price .big small{font-size:14px;font-weight:700;letter-spacing:0}
+.sy-price .cmp{display:flex;gap:8px;margin-top:12px}
+.sy-price .cmp div{flex:1;background:rgba(255,255,255,.65);border-radius:12px;padding:8px 10px;font-size:11.5px;line-height:1.35}
+.sy-price .cmp b{display:block;font-size:15px}
+.sy-price .cmp s{opacity:.6}
+.sy-play{background:#110E11;color:#fff;border-radius:20px;padding:14px;display:flex;gap:12px;align-items:center}
+.sy-play img{width:92px;height:92px;border-radius:10px;object-fit:cover;flex:none}
+.sy-play b{display:block;font-size:14.5px;line-height:1.25}
+.sy-play span{display:block;font-size:11.5px;opacity:.7;margin-top:2px}
+.sy-play .bar{height:4px;border-radius:2px;background:rgba(255,255,255,.2);margin-top:10px;overflow:hidden}
+.sy-play .bar i{display:block;height:100%;width:38%;background:#FF5C28;animation:prog 9s linear infinite}
+@keyframes prog{from{width:12%}to{width:72%}}
+.sy-play .chips{display:flex;gap:5px;margin-top:9px;flex-wrap:wrap}
+.sy-play .chips em{font-style:normal;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.14)}
+.sy-book{display:flex;gap:12px;align-items:flex-end;background:var(--c-card);border-radius:20px;padding:12px}
+.sy-book img{width:120px;height:120px;border-radius:10px;object-fit:cover;flex:none;box-shadow:0 10px 22px -10px rgba(0,0,0,.45)}
+.sy-book b{display:block;font-size:16px;line-height:1.2}
+.sy-book span{display:block;font-size:12px;color:var(--c-mute);margin-top:3px}
+.sy-book em{display:inline-flex;margin-top:9px;font-style:normal;font-size:11.5px;font-weight:700;color:var(--c-or)}
+.sy-rail{display:flex;gap:6px;margin-top:8px}
+.sy-rail img{flex:1;min-width:0;aspect-ratio:1;border-radius:8px;object-fit:cover}
+.sy-inc{margin:16px 16px 0;border-radius:18px;background:var(--c-card);padding:6px 12px}
+.sy-inc div{display:flex;gap:10px;align-items:center;padding:8px 0;font-size:13.5px;color:var(--c-ink)}
+.sy-inc div+div{border-top:1px solid var(--c-line)}
+.sy-inc div.lead{font-weight:700}
+.sy-inc i{width:24px;height:24px;border-radius:50%;background:var(--c-or);color:#fff;display:grid;place-items:center;font-style:normal;font-size:12px;flex:none}
+.sy-inc small{display:block;font-size:11px;color:var(--c-mute);font-weight:500}
+.sy-plans{display:flex;flex-direction:column;gap:9px;margin:16px 16px 0;padding:2px;border-radius:18px}
+.sy-plan{position:relative;display:flex;align-items:center;gap:12px;background:var(--c-bg);border-radius:18px;padding:14px;border:2px solid var(--c-line);text-align:left;color:var(--c-ink);transition:.15s}
+.sy-plan .rd{width:20px;height:20px;border-radius:50%;border:2px solid var(--c-mute);flex:none;display:grid;place-items:center}
+.sy-plan.on{border-color:var(--c-ink)}
+.sy-plan.on .rd{border-color:var(--c-ink);background:var(--c-ink)}
+.sy-plan.on .rd:after{content:"";width:8px;height:8px;border-radius:50%;background:var(--c-bg)}
+.sy-plan .n{font-size:15px;font-weight:700}
+.sy-plan .s{display:block;font-size:12px;color:var(--c-mute);font-weight:500;margin-top:1px}
+.sy-plan .p{margin-left:auto;text-align:right;font-size:16px;font-weight:800;white-space:nowrap}
+.sy-plan .p small{display:block;font-size:11.5px;color:var(--c-mute);font-weight:500}
+.sy-plan .fr{position:absolute;top:-10px;left:14px;background:var(--c-or);color:#fff;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:999px}
+.sy-plan .sv{position:absolute;top:-10px;right:14px;background:var(--c-ylw);color:#110E11;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px}
+.sy-tl{margin:12px 16px 0;display:flex;font-size:11.5px;color:var(--c-ink2)}
+.sy-tl div{flex:1;position:relative;padding-top:15px;padding-right:6px}
+.sy-tl div:before{content:"";position:absolute;left:0;right:0;top:4px;height:3px;background:var(--c-card2)}
+.sy-tl div:first-child:before{background:var(--c-or)}
+.sy-tl div:after{content:"";position:absolute;left:0;top:0;width:11px;height:11px;border-radius:50%;background:var(--c-bg);border:2.5px solid var(--c-or)}
+.sy-tl b{display:block;color:var(--c-ink);font-size:12px}
+.sy-proof{margin:16px 16px 0;background:var(--c-card);border-radius:18px;padding:13px}
+.sy-proof .t{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--c-ink2);flex-wrap:wrap}
+.sy-proof .t b{font-size:18px;color:var(--c-ink)}
+.sy-st{color:var(--c-star);letter-spacing:1px;font-size:12.5px}
+.sy-proof q{display:block;font-size:13.5px;line-height:1.4;margin-top:8px;font-weight:600;color:var(--c-ink);quotes:"“" "”"}
+.sy-proof small{display:block;font-size:11px;color:var(--c-mute);margin-top:5px}
+.sy-legal{font-size:10.5px;color:var(--c-mute);margin:14px 16px 0;line-height:1.45;text-align:center}
+.sy-foot{padding:10px 16px 18px;text-align:center;background:var(--c-bg);border-top:1px solid var(--c-line)}
+.sy-near{display:flex;justify-content:center;align-items:center;gap:6px;font-size:11.5px;color:var(--c-ink2);margin-bottom:8px;font-weight:600}
+.sy-near b{color:var(--c-ink)}
+.sy-bill{font-size:12px;color:var(--c-mute);margin-top:8px;line-height:1.4}
+
+/* the ad, playing */
+.sy-ad{position:relative;height:100%;background:#000;color:#fff;display:flex;flex-direction:column}
+.sy-ad video,.sy-ad img.po{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sy-ad.img{background:#18171A}
+.sy-ad.img img.po{position:static;width:100%;height:auto;margin-top:120px}
+.sy-ad .top{position:absolute;left:0;right:0;top:0;z-index:3;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0))}
+.sy-ad .who{display:flex;align-items:center;gap:8px;padding:4px 16px 14px;font-size:13px;font-weight:600}
+.sy-ad .who img{width:30px;height:30px;border-radius:8px}
+.sy-ad .who small{display:block;font-size:11px;font-weight:500;opacity:.8}
+.sy-ad .txt{position:relative;z-index:2;padding:12px 16px;font-size:13px;line-height:1.4}
+.sy-ad .bar{position:absolute;left:12px;right:12px;bottom:26px;z-index:3;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);color:#110E11;border-radius:16px;padding:10px 10px 10px 12px}
+.sy-ad .bar img{width:40px;height:40px;border-radius:10px}
+.sy-ad .bar b{display:block;font-size:13.5px}
+.sy-ad .bar span{display:block;font-size:11px;color:#6B6468}
+.sy-ad .bar button{margin-left:auto;height:36px;padding:0 16px;border-radius:999px;background:#110E11;color:#fff;font-size:13.5px;font-weight:700;white-space:nowrap}
+
+/* home, after */
+.sy-hm{padding:0 16px}
+.sy-hm .top{display:flex;align-items:center;justify-content:space-between;height:44px}
+.sy-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
+.sy-chips span{height:32px;padding:0 14px;border-radius:999px;border:1.5px solid var(--c-line);font-size:13px;font-weight:600;display:inline-flex;align-items:center}
+.sy-chips span.on{background:var(--c-btn);color:var(--c-btnt);border-color:var(--c-btn)}
+.sy-ok{margin-top:12px;border-radius:18px;padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:12.5px;line-height:1.35;background:var(--c-card);color:var(--c-ink2)}
+.sy-ok.on{background:var(--c-or);color:#fff}
+.sy-ok b{display:block;font-size:14px}
+.sy-ok svg{width:22px;height:22px;flex:none}
+.sy-hm h6{font-size:17px;font-weight:800;margin:16px 0 8px}
+.sy-row{display:flex;gap:8px;overflow:hidden}
+.sy-row figure{flex:none;width:104px;position:relative}
+.sy-row img{width:104px;height:104px;border-radius:10px;object-fit:cover}
+.sy-row figcaption{font-size:10.5px;color:var(--c-mute);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sy-row .lk{position:absolute;left:6px;top:6px;height:20px;padding:0 7px;border-radius:99px;background:rgba(17,14,17,.75);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center}
+.sy-mini{position:absolute;left:10px;right:10px;bottom:88px;z-index:7;display:flex;align-items:center;gap:10px;background:var(--c-card2);border-radius:14px;padding:8px}
+.sy-mini img{width:38px;height:38px;border-radius:6px}
+.sy-mini b{display:block;font-size:12.5px}
+.sy-mini span{display:block;font-size:11px;color:var(--c-mute)}
+.sy-mini i{margin-left:auto;width:30px;height:30px;border-radius:50%;background:var(--c-btn);color:var(--c-btnt);display:grid;place-items:center;font-style:normal;font-size:12px}
+.sy-tab{position:absolute;left:0;right:0;bottom:0;z-index:7;display:flex;justify-content:space-around;padding:8px 0 24px;background:var(--c-bg);border-top:1px solid var(--c-line);font-size:10px;font-weight:600;color:var(--c-mute)}
+.sy-tab div{display:flex;flex-direction:column;align-items:center;gap:3px}
+.sy-tab svg{width:22px;height:22px}
+.sy-tab .on{color:var(--c-ink)}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-in">
+  <img class="logo-st" src="img/logo.svg?v=2" alt="Storytel">
+  <span class="sep"></span><span class="lbl">Growth audit · by Adapty</span>
+  <div class="tabs"><button data-v="over" class="on">Overview</button><button data-v="pw">Prototype</button></div>
+  <a class="demo" href="https://calendly.com/d/cty4-37z-zqj" target="_blank" rel="noopener">Book a demo</a>
+</div></nav>
+
+<!-- ======================= OVERVIEW ======================= -->
+<div class="view on" id="view-over">
+  <header class="hero hero-frame sky">
+    <div class="rise" id="rise" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <div>
+        <div class="eyebrow">Growth audit · November 2026 · Prepared by Adapty</div>
+        <h1>Your ad in Mexico says “12 meses a mitad de precio”. <em>The app opens on $169 a month.</em></h1>
+        <p class="lead">Your Meta ads sell a price, a commute, a single book read by a famous voice. In the app, everyone picks a country, signs up, picks languages and then meets the same three screens: a plan pitch, a plan picker with Monthly ticked, and a confirmation with a terms checkbox. Here is one Premium screen that opens on what the ad promised, with the yearly plan and its free week first, in your design, at your Mexican prices.</p>
+        <div class="cta-row">
+          <button class="btn-w" data-open="pw">Open the three paywalls</button>
+          <button class="btn-o" data-walk>▶ Watch the 30-second walkthrough</button>
+        </div>
+        <p class="byline">Built from a walkthrough of Storytel on iOS in Mexico, your App Store listing, storytel.com/mx and your live Meta ads.</p>
+      </div>
+      <div class="fan" aria-hidden="true">
+        <img src="img/mx1.jpg" style="left:0;top:74px;transform:rotate(-8deg)" alt="">
+        <img src="img/mx3.jpg" style="left:29%;top:14px;transform:rotate(-1deg);z-index:2" alt="">
+        <img src="img/mx2.jpg" style="left:58%;top:84px;transform:rotate(7deg)" alt="">
+        <img class="j" src="img/icon.jpg" alt="">
+      </div>
+    </div>
+  </header>
+
+  <div class="stats"><div class="wrap">
+    <div class="stat"><b><i>★</i> 4.8</b><span>from 23K ratings on the Mexican App Store</span></div>
+    <div class="stat"><b>1M+</b><span>titles, says storytel.com/mx</span></div>
+    <div class="stat"><b>3</b><span>paywall screens before Apple’s sheet: pitch, plans, confirmation</span></div>
+    <div class="stat"><b>40%</b><span>less on the yearly plan, as your site says: $1,190 vs 12 × $169</span></div>
+  </div></div>
+
+  <section class="sec"><div class="wrap about">
+    <div>
+      <div class="kick">What this is</div>
+      <h2 class="sec-h">We rebuilt the Storytel paywall around <b>what the ad promised</b>.</h2>
+      <p class="sec-p">Adapty powers subscriptions for 30,000+ apps, so we see what moves purchases across the market. Nearly 500 apps build their paywalls and onboarding in Adapty Flow Builder, and millions of dollars in subscription revenue pass through it every month. For Storytel we looked at one thing: the paywall. Country, sign-up, consent and languages stay exactly as they are.</p>
+      <div class="flowp">
+        <div class="k2">The paywall in a first session today, in Mexico</div>
+        <div><i>1</i><span>“Audiobooks for everyone” over a wall of covers, then country, account, consent and languages. <b>Kept.</b></span></div>
+        <div><i>2</i><span>A plan pitch with a feature list and “Try now”, then annual vs monthly with Monthly ticked, then a confirmation with the 7-day free trial and a terms checkbox. <b>Now one screen, Yearly ticked.</b></span></div>
+        <div><i>3</i><span>After the purchase, the tracking prompt. <b>We’d move it before the paywall; it isn’t one of the five ideas.</b></span></div>
+        <div><i>4</i><span>The same paywall whichever ad brought them. <b>Now it opens on the ad’s promise.</b></span></div>
+      </div>
+    </div>
+    <div>
+      <div class="note"><h4><i>1</i>Your design, not ours</h4><p>Your orange #FF5C28 headlines and speech-bubble mark, the black pill buttons, outlined pill chips, the yellow, pink and blue of your App Store pages, your covers and your dark player. Only what the paywall says, and in what order, changes.</p></div>
+      <div class="note"><h4><i>2</i>Your prices, as published</h4><p>Mexico: $169 MXN a month and $1,190 MXN a year, from your App Store in-app purchases and storytel.com/mx, which also says “Ahorra 40%”. $1,190 a year is $99.17 a month. The 7-day free trial is on the yearly plan, as your confirmation screen shows. The web’s $84.50 a month is not an App Store price, so it is not on the phones.</p></div>
+      <div class="note"><h4><i>3</i>You may have tested some of this</h4><p>We saw one session, in Mexico. You may already change the paywall by market or campaign. Tell us what you already ran and we will go deeper on the rest.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="kick">Your ads, from the Meta Ad Library</div>
+    <h2 class="sec-h">Your ads sell a price, a ride, a voice. <b>The paywall sells “Unlimited” to all three.</b></h2>
+    <p class="sec-p">Atlas shows Storytel on Meta, YouTube and AdMob without creatives, so we read the Meta Ad Library: hundreds of active Storytel ads, a 50%-for-12-months push since early November in English, Spanish and Bulgarian, commute videos and title ads read by known voices in Türkiye, single titles in Norway. Three of them become the three phones.</p>
+    <div class="entries" id="entries"></div>
+    <div class="asa"><span>“12 meses al 50%: $84.50/mes”</span><span>“Audiobooks &amp; eBooks on 50% discount for 12 months”</span><span>“Proovi 14 päeva tasuta”</span><span>“Prøv gratis nå”</span>Meta Ad Library, active on 27 Nov 2026</div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="kick">The five ideas</div>
+    <h2 class="sec-h">Ranked by what we would <b>test first</b>.</h2>
+    <p class="sec-p">Tap any of them to open that change on all three phones.</p>
+    <div class="list" id="list"></div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="kick">Potential outcome</div>
+    <h2 class="sec-h">Five changes, <b>one paywall every buyer sees</b>.</h2>
+    <div class="outc">
+      <div class="osh">
+        <img class="ph" src="img/mx3.jpg" alt="">
+        <div class="k">Run together</div>
+        <h3>Every ad answered by its own promise, on one screen, yearly first</h3>
+        <div class="nums"><div><b>+15–20%</b><span>purchases</span></div><div><b>+10–15%</b><span>ARPU, from more yearly plans</span></div></div>
+        <p class="cap">Each ad’s paywall runs as its own A/B test against today’s three screens, judged on revenue per paywall view.</p>
+      </div>
+      <div class="dos">
+        <div class="do"><div class="k">Do this week</div><h4>Pass the campaign to the paywall</h4><p>The ad behind an install is known at first open. In Flow Builder the headline and the first card read it, per market. Live without an app release.</p></div>
+        <div class="do"><div class="k">Then</div><h4>One screen, Yearly ticked, terms as one line</h4><p>The pitch, the plan picker and the confirmation become one screen; the free week sits on the yearly plan, where your listing’s “cancel before the last day” promise goes next to the button.</p></div>
+        <div class="do"><div class="k">And measure</div><h4>Revenue per paywall view, by ad and market</h4><p>Adapty reports trials, conversions and refunds per campaign and storefront, alongside your web sign-ups, so you see which ad sells a subscription in the app.</p></div>
+      </div>
+    </div>
+    <div class="endcta"><button class="btn-k" data-open="pw">Open the prototype</button><a class="btn-l" href="https://calendly.com/d/cty4-37z-zqj" target="_blank" rel="noopener">Book a demo</a></div>
+    <p class="foot">Impact ranges are Adapty’s expected effect from teardowns and A/B tests across subscription apps, not measured lift for Storytel. $169 MXN a month and $1,190 MXN a year are “Storytel Ilimitado (México)” and “Storytel Unlimited 1Y (Mexico)” in the Mexican App Store’s in-app purchase list, read on 27 November 2026, and match storytel.com/mx, which also says “Ahorra 40%”, “Más de 1 millón de títulos”, “Modo sin conexión”, “Kids Mode” and “Cancela en cualquier momento”, and offers 12 months at $84.50 MXN a month on the web. “If you cancel before the last day of the trial you won’t be charged” and Kids Mode with a pin code are from the App Store listing; 4.8 from 23K ratings and the reviews by jaiba potosina, Lupiserra, hortizr and Nicrematessindentar are from the Mexican App Store. The paywall’s three screens, the 7-day free trial on the yearly plan and the tracking prompt after the purchase are from a walkthrough of Storytel on iOS with Mexico selected; on the Today step they are shown as captured. The ads are from the Meta Ad Library, active on 27 November 2026. Covers and App Store screenshots are yours; progress, minutes and listening history on the phones are samples. $99.17 is $1,190 ÷ 12.</p>
+  </div></section>
+</div>
+
+<!-- ======================= PROTOTYPE ======================= -->
+<div class="view" id="view-pw">
+  <div class="wrap pwv">
+    <div class="kick">Prototype · one paywall, three ads in</div>
+    <h1>Three people install from three ads. <b>One paywall answers each.</b></h1>
+    <p class="sub">Someone who saw “12 meses a mitad de precio”, someone who wants a story for the metro, someone who came for one book. Same Mexican prices, same design. Tap the steps, or tap inside any phone: pick a plan, buy, close it. Change the ad or who listens under a phone and its paywall rewrites itself.</p>
+    <div class="tools">
+      <div class="seg" id="theme"><button data-th="light" class="on">Light</button><button data-th="dark">Dark</button></div>
+      <button class="wt" id="wt" data-walk>▶ 30-second walkthrough</button>
+    </div>
+    <div class="steps" id="steps">
+      <button data-st="today" class="td">Today</button><button data-st="ad">1 · The ad</button><button data-st="pw" class="on">2 · Storytel Unlimited</button><button data-st="plans">3 · Plans</button><button data-st="open">4 · Back in Storytel</button>
+    </div>
+    <p class="stcap" id="stcap"></p>
+    <div class="dcap" id="dcap"><div class="dcap-in"><span id="dtx"></span><div class="pr"><i id="dpr"></i></div></div></div>
+    <div class="trio" id="trio"></div>
+    <div class="ideas" id="ideas"></div>
+    <div class="qr sky">
+      <img class="masc" src="img/char.png" alt="">
+      <img class="code" src="img/qr.svg" alt="QR code to this prototype">
+      <div><h3>Try it on your phone</h3><p>Scan to open the three paywalls in your hand. Every screen is buildable in Adapty Flow Builder and testable against today’s.</p></div>
+      <a class="demo" href="https://calendly.com/d/cty4-37z-zqj" target="_blank" rel="noopener">Book a demo</a>
+    </div>
+  </div>
+</div>
+
+<script>
+var $=function(s,r){ return (r||document).querySelector(s); }, $$=function(s,r){ return [].slice.call((r||document).querySelectorAll(s)); };
+function SV(d,w,fill){ return '<svg viewBox="0 0 24 24" fill="'+(fill||'none')+'" stroke="currentColor" stroke-width="'+(w||2)+'" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>'; }
+var XI=SV('<path d="M6 6l12 12M18 6 6 18"/>',2.6), CHECK=SV('<path d="M5 12.5l4.5 4.5L19 7.5"/>',2.6);
+var G={ theme:'light', step:'pw' };
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+/* the ads that bring people in, from the Meta Ad Library */
+var AD={
+  half:{n:'Meta · “12 meses a mitad de precio” (Mexico)',sh:'“12 meses a mitad de precio”',mt:'Meta · MX',img:'ads/mx50.jpg',txt:'Audiolibros y eBooks ilimitados. 12 meses al 50%: $84.50/mes.',cta:'Subscribe',lead:'price',chip:'From your ad: “12 meses a mitad de precio”',
+    head:['A year of audiobooks for $99.17 a month','A year of stories for the whole house, $99.17 a month'],sub:'Your yearly plan: $1,190 MXN instead of 12 × $169. In the app, the closest thing to your ad’s half price.',order:['save','titles','offline','cancel']},
+  metro:{n:'Meta · “Uzun metro yolculuklarının kurtarıcısı” (Türkiye)',sh:'“the saviour of long metro rides”',mt:'Meta · TR',src:'ads/metro.mp4',po:'ads/metro.jpg',cta:'Install',lead:'play',chip:'From your ad: a story for the metro',
+    head:['Every ride, with a story in your ears','Every ride and every bedtime, with a story'],sub:'Download before you leave, listen offline, at the speed you like.',order:['offline','titles','cancel','save']},
+  author:{n:'Meta · García Márquez read by Okan Bayülgen (Türkiye)',sh:'García Márquez, read aloud',mt:'Meta · TR',src:'ads/marquez.mp4',po:'ads/marquez.jpg',cta:'Install',lead:'book',chip:'From your ad: Gabriel García Márquez',
+    head:['Cien años de soledad, read to you tonight','Cien años de soledad tonight, and stories for the kids'],sub:'Gabriel García Márquez and more than 1 million titles, in Spanish and English.',order:['titles','offline','cancel','save']},
+  title:{n:'Meta · “Skjerm barna” by Maja Lunde (Norway)',sh:'“Skjerm barna”, one title',mt:'Meta · NO',img:'ads/kids.jpg',txt:'I Storytel finner du noe for enhver smak, enten du ønsker lærerike faktabøker, interessante dokumentarer eller ramsterke biografier!',cta:'Learn more',lead:'book',chip:'From your ad: one book, by name',
+    head:['The book from the ad, and a million more','The book from the ad, and Kids Mode for them'],sub:'Start with the title you came for. Keep going with more than 1 million.',order:['titles','cancel','offline','save']}
+};
+var WHO={me:'Just me',kids:'Me and my kids'};
+/* what Unlimited includes: storytel.com/mx */
+var INC={
+  titles:['More than 1 million titles','Audiobooks, ebooks and podcasts'],
+  offline:['Offline mode','Download now, listen without signal'],
+  kids:['Kids Mode','Only children’s books, behind your own pin code'],
+  cancel:['Cancel anytime',''],
+  save:['Save 40% on the yearly plan','$1,190 MXN instead of 12 × $169']
+};
+/* reviews, verbatim, from the Mexican App Store */
+var REV={
+  price:['Buen precio, buen catálogo.','Lupiserra, App Store review'],
+  play:['es mi compañera en los viajes por carretera, en el tráfico, en las caminatas','jaiba potosina, App Store review'],
+  book:['Es como un Netflix de libros y audiolibros','hortizr, App Store review'],
+  kids:['Esta es la mejor app para oír cuentos','Nicrematessindentar, App Store review']
+};
+/* prices: Mexican App Store in-app purchases and storytel.com/mx */
+var PLANS={y:['Yearly','$99.17 MXN a month','$1,190','MXN per year','7 days free','Try 7 days free','Free for 7 days, then $1,190 MXN a year. Cancel before the last day and you won’t be charged.'],m:['Monthly','Billed monthly','$169','MXN per month','','Continue','$169 MXN a month. Cancel anytime.']};
+
+/* the three phones: three ads, three people */
+var PH=[
+  {ad:'half',who:'me',ring:'#FF5C28',lab:['Meta · Mexico','Saw “12 meses a mitad de precio”.']},
+  {ad:'metro',who:'me',ring:'#110E11',lab:['Meta · commute ad','Wants something for the ride to work.']},
+  {ad:'author',who:'kids',ring:'#3D7BF7',lab:['Meta · a title ad','Came for one author; listens with the kids.']}
+];
+var COL=PH.map(function(){ return {}; });
+function initCol(i,keep){ var c=COL[i], p=PH[i]; if(!keep||!c.ad){ c.ad=p.ad; c.who=p.who; } c.plan='y'; c.tk=0; return c; }
+PH.forEach(function(p,i){ initCol(i); });
+
+var TCAP={
+  today:'<b>Today.</b> After country, account, consent and languages, every install meets the same three screens: a plan pitch, annual vs monthly with Monthly ticked, a confirmation with a terms checkbox. Then the tracking prompt. Shown as captured; tap through them.',
+  ad:'<b>Step 1.</b> The ad that brought them: 12 months at half price in Mexico, a commute video and a García Márquez title read by Okan Bayülgen in Türkiye.',
+  pw:'<b>Step 2. Proposed:</b> the paywall opens on what the ad promised: the yearly price, a story playing offline, the book they came for. Then what Unlimited includes.',
+  plans:'<b>Step 3. Proposed:</b> Yearly ticked at $99.17 MXN a month with the free week, “cancel before the last day” on one line, 4.8 from 23K ratings by the button.',
+  open:'<b>Step 4.</b> After the purchase: Home, with the book they came for ready to play. The X goes to Home too. No second paywall.'
+};
+
+function sb(w){ return '<div class="sb'+(w?' w':'')+'"><span>9:41</span><i class="isl"></i><span class="ic"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="14" height="8" rx="2" fill="currentColor"/></svg></span></div>'; }
+
+/* today: your three paywall screens and the tracking prompt, as captured */
+var TODAY=['img/today-1.jpg','img/today-2.jpg','img/today-3.jpg','img/today-4.jpg'];
+var TNOTE=['1 of 4 · A plan pitch: Unlimited, a feature list, “Try now”.','2 of 4 · Annual vs monthly, with Monthly ticked, and Continue.','3 of 4 · A confirmation: the 7-day free trial, annual pricing, a terms checkbox.','4 of 4 · After the purchase: the tracking prompt.'];
+function scrToday(i){ var k=COL[i].tk||0;
+  return '<div class="sy-cap" data-act="tnext"><img src="'+TODAY[k]+'" alt=""><div class="tdots">'+TODAY.map(function(x,n){ return '<i'+(n===k?' class="on"':'')+'></i>'; }).join('')+'</div><div class="sy-today">'+TNOTE[k]+' Tap to go on.</div></div>'; }
+
+/* step 1: the ad itself */
+function scrAd(i){
+  var A=AD[COL[i].ad];
+  var top='<div class="top">'+sb(1)+'<div class="who"><img src="img/icon.jpg" alt=""><div>Storytel<small>Sponsored</small></div></div></div>';
+  var bar='<div class="bar"><img src="img/icon.jpg" alt=""><div><b>Storytel</b><span>Audiobooks &amp; ebooks</span></div><button class="sy-tap" data-act="open">'+A.cta+'</button></div>';
+  if(A.img) return '<div class="sy-ad img">'+top+'<img class="po" src="'+A.img+'" alt=""><div class="txt">'+esc(A.txt)+'</div>'+bar+'</div>';
+  return '<div class="sy-ad"><img class="po" src="'+A.po+'" alt=""><video src="'+A.src+'" poster="'+A.po+'" autoplay muted loop playsinline preload="metadata"></video>'+top+bar+'</div>';
+}
+
+/* step 4: Home, after the paywall */
+function scrHome(i,mode){
+  var on=mode==='open', c=COL[i], A=AD[c.ad];
+  var first=A.lead==='book'?['img/c-cien.jpg','Cien años de soledad']:A.lead==='play'?['img/c-sombra.jpg','La sombra del viento']:['img/c-hp.jpg','Harry Potter y la piedra filosofal'];
+  var R=[['img/c-onix.jpg','Alas de ónix'],['img/c-anillos.jpg','El Señor de los Anillos'],['img/c-redondo.jpg','Todas las noches'],['img/c-escarlata.jpg','Estudio en escarlata']];
+  return sb()+'<div class="scr-body" style="padding-bottom:170px"><div class="sy-hm"><div class="top"><span class="sy-logo"></span><span class="sy-x" style="width:32px;height:32px">'+SV('<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',2)+'</span></div>'+
+    '<div class="sy-chips"><span class="on">All</span><span>Audiobooks</span><span>Ebooks</span>'+(c.who==='kids'?'<span>Kids</span>':'')+'</div>'+
+    (on?'<div class="sy-ok on">'+CHECK+'<div><b>Storytel Unlimited is on</b>'+(c.plan==='y'?'Your free week has started.':'Every title, offline too.')+'</div></div>':
+         '<div class="sy-ok">'+SV('<path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/>',2)+'<div><b>Start Unlimited when you’re ready</b>Your bookshelf and previews are here.</div></div>')+
+    '<h6>'+(on?'Ready for you':'Recommended for you')+'</h6><div class="sy-row">'+[first].concat(R).map(function(b,k){ return '<figure><img src="'+b[0]+'" alt="">'+(!on?'<span class="lk">Preview</span>':'')+'<figcaption>'+b[1]+'</figcaption></figure>'; }).join('')+'</div></div></div>'+
+    (on?'<div class="sy-mini"><img src="'+first[0]+'" alt=""><div><b>'+first[1]+'</b><span>Chapter 1 · '+(A.lead==='play'?'downloaded':'streaming')+'</span></div><i>▶</i></div>':'')+
+    '<div class="sy-tab"><div class="on">'+SV('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>',2)+'Home</div><div>'+SV('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',2)+'Explore</div><div>'+SV('<path d="M5 4h4v16H5zM10 4h4v16h-4zM15.5 4.5l3.8 1 -3.8 14.5-3.8-1z"/>',2)+'Bookshelf</div></div>';
+}
+
+/* the first card on the paywall: the ad's promise */
+function leadHTML(i){
+  var c=COL[i], k=AD[c.ad].lead;
+  if(k==='price') return '<div class="sy-lead" data-hl="lead"><div class="sy-price"><div class="k">Storytel Unlimited · Yearly</div><div class="big">$99.17 <small>MXN a month</small></div><div class="cmp"><div><s>12 × $169</s><b>$2,028</b>Monthly, for a year</div><div><span>Yearly</span><b>$1,190</b>Ahorra 40%</div></div></div></div>';
+  if(k==='play') return '<div class="sy-lead" data-hl="lead"><div class="sy-play"><img src="img/c-sombra.jpg" alt=""><div style="flex:1;min-width:0"><b>La sombra del viento</b><span>Carlos Ruiz Zafón · Chapter 3</span><div class="bar"><i></i></div><div class="chips"><em>⬇ Downloaded</em><em>1.5×</em><em>☾ Sleep timer</em></div></div></div></div>';
+  var kids=c.who==='kids';
+  return '<div class="sy-lead" data-hl="lead"><div class="sy-book"><img src="img/c-cien.jpg" alt=""><div><b>Cien años de soledad</b><span>Gabriel García Márquez</span><em>▶ Listen to the first chapter</em></div></div><div class="sy-rail">'+(kids?['c-hp','c-anillos','c-clare','c-corte']:['c-sombra','c-hombres','c-redondo','c-pideme']).map(function(n){ return '<img src="img/'+n+'.jpg" alt="">'; }).join('')+'</div></div>';
+}
+function headline(i){ var c=COL[i]; return AD[c.ad].head[c.who==='kids'?1:0]; }
+function incHTML(i){
+  var c=COL[i], o=AD[c.ad].order.slice(); if(c.who==='kids') o.splice(1,0,'kids');
+  return '<div class="sy-inc" data-hl="inc">'+o.map(function(k,n){ var r=INC[k]; return '<div class="'+(n===0?'lead':'')+'"><i>✓</i><span>'+r[0]+(r[1]?'<small>'+r[1]+'</small>':'')+'</span></div>'; }).join('')+'</div>';
+}
+function plansHTML(i){
+  var c=COL[i];
+  return '<div class="sy-plans" data-hl="plans">'+['y','m'].map(function(k){ var p=PLANS[k];
+    return '<button class="sy-plan'+(c.plan===k?' on':'')+'" data-act="plan" data-p="'+k+'">'+(p[4]?'<span class="fr">'+p[4]+'</span>':'')+(k==='y'?'<span class="sv">Ahorra 40%</span>':'')+'<span class="rd"></span><span><span class="n">'+p[0]+'</span><span class="s">'+p[1]+'</span></span><span class="p">'+p[2]+'<small>'+p[3]+'</small></span></button>'; }).join('')+'</div>'+
+    (c.plan==='y'?'<div class="sy-tl" data-hl="tl"><div><b>Today</b>Every title, $0</div><div><b>Day 6</b>Cancel, pay nothing</div><div><b>Day 7</b>$1,190 MXN for the year</div></div>':'');
+}
+function scrPW(i){
+  var c=COL[i], A=AD[c.ad], P=PLANS[c.plan], R=REV[c.who==='kids'?'kids':A.lead];
+  return '<div class="sy-pw">'+sb()+
+    '<div class="sy-head"><span class="sy-logo"></span><button class="sy-x" data-act="x" aria-label="Close">'+XI+'</button></div>'+
+    '<div class="scr-body" style="padding-bottom:12px"><div class="sy-hero"><div class="sy-ph" data-hl="head">'+headline(i)+'</div><div class="sy-sub">'+A.sub+'</div>'+
+    '<div class="sy-tags" data-hl="chip"><span>'+esc(A.chip)+'</span></div>'+leadHTML(i)+'</div>'+
+    incHTML(i)+plansHTML(i)+
+    '<div class="sy-proof" data-hl="proof"><div class="t"><b>4.8</b><span class="sy-st">★★★★★</span><span>23K ratings on the App Store in Mexico</span></div><q>'+R[0]+'</q><small>'+R[1]+'</small></div>'+
+    '<p class="sy-legal">By continuing you accept the Terms and Conditions. Subscriptions renew automatically unless turned off at least 24 hours before the period ends. Restore purchases · Privacy</p>'+
+    '</div>'+
+    '<div class="scr-foot sy-foot"><div class="sy-near" data-hl="near"><span class="sy-st">★★★★★</span><b>4.8</b> · 23K ratings · cancel anytime</div><button class="sy-btn" data-act="buy">'+P[5]+'</button><div class="sy-bill" data-hl="bill">'+P[6]+'</div></div></div>';
+}
+
+function stepScr(st){ return st==='plans'?'pw':st; }
+function phoneHTML(i){
+  var c=COL[i], s=c.scr, inner;
+  if(s==='today') inner=scrToday(i); else if(s==='ad') inner=scrAd(i); else if(s==='open'||s==='closed') inner=scrHome(i,s); else inner=scrPW(i);
+  return '<div class="phone'+(G.theme==='dark'?' dk':'')+'"><section class="scr" data-s="'+s+'">'+inner+'<div class="toast"></div></section></div>';
+}
+function drawCol(i,keep){
+  var box=$('#trio .tcol[data-i="'+i+'"] .pbox'); if(!box) return;
+  var ph=box.querySelector('.phone'), b=box.querySelector('.scr-body'), y=b?b.scrollTop:0;
+  var tmp=document.createElement('div'); tmp.innerHTML=phoneHTML(i);
+  if(ph) box.replaceChild(tmp.firstChild,ph); else box.insertBefore(tmp.firstChild,box.firstChild);
+  if(keep){ var nb=box.querySelector('.scr-body'); if(nb) nb.scrollTop=y; }
+  var pt=$('#trio .tcol[data-i="'+i+'"] .apill .tx'); if(pt) pt.textContent=pillText(i);
+  var mt=$('#trio .tcol[data-i="'+i+'"] .apill .mt'); if(mt) mt.textContent=AD[COL[i].ad].mt;
+}
+function go(i,s){ COL[i].scr=s; drawCol(i); }
+function pillText(i){ var c=COL[i]; return AD[c.ad].sh+' · '+WHO[c.who]; }
+function ansHTML(i){ var c=COL[i];
+  return '<div class="ans" data-ans="'+i+'"><label>Came from<select data-k="ad">'+Object.keys(AD).map(function(k){ return '<option value="'+k+'"'+(k===c.ad?' selected':'')+'>'+AD[k].n+'</option>'; }).join('')+'</select></label><label>Who listens<select data-k="who">'+Object.keys(WHO).map(function(k){ return '<option value="'+k+'"'+(k===c.who?' selected':'')+'>'+WHO[k]+'</option>'; }).join('')+'</select></label></div>'; }
+function syncAns(i){ var a=$('#trio [data-ans="'+i+'"]'); if(!a) return; $$('select',a).forEach(function(s){ s.value=COL[i][s.dataset.k]; }); }
+document.addEventListener('change',function(e){
+  var s=e.target.closest('[data-ans] select'); if(!s) return; var i=+s.closest('[data-ans]').dataset.ans; COL[i][s.dataset.k]=s.value;
+  if(COL[i].scr!=='pw') COL[i].scr='pw'; drawCol(i);
+  $$('#trio .tcol[data-i="'+i+'"] [data-hl=head],#trio .tcol[data-i="'+i+'"] [data-hl=chip],#trio .tcol[data-i="'+i+'"] [data-hl=lead]').forEach(pulseEl);
+});
+
+function renderTrio(){
+  $('#trio').innerHTML=PH.map(function(p,i){
+    return '<div class="tcol" data-i="'+i+'" style="--ring:'+p.ring+'"><div class="apill"><span class="mt">'+AD[COL[i].ad].mt+'</span><span class="tx">'+pillText(i)+'</span></div><div class="pbox"><i class="finger"></i></div><div class="tlab"><b>'+p.lab[0]+'</b><span>'+p.lab[1]+'</span></div>'+ansHTML(i)+'</div>';
+  }).join('');
+  PH.forEach(function(p,i){ drawCol(i); });
+}
+function paintSteps(){ $$('#steps button').forEach(function(b){ b.classList.toggle('on',b.dataset.st===G.step); }); $('#stcap').innerHTML=TCAP[G.step]||''; $$('#trio .tcol').forEach(function(t){ t.classList.toggle('ring',G.step!=='today'); }); }
+function offTop(el,b){ var y=0; while(el&&el!==b){ y+=el.offsetTop; el=el.offsetParent; } return y; }
+function setStep(st,keep){ G.step=st; PH.forEach(function(p,i){ initCol(i,keep); COL[i].scr=stepScr(st); }); paintSteps(); PH.forEach(function(p,i){ drawCol(i); syncAns(i); });
+  if(st==='plans') PH.forEach(function(p,i){ var box=$('#trio .tcol[data-i="'+i+'"] .pbox'), b=$('.scr-body',box), el=$('[data-hl=plans]',box); if(b&&el) b.scrollTop=Math.max(0,offTop(el,b)-40); }); }
+function toast(i,m){ var e=$('#trio .tcol[data-i="'+i+'"] .toast'); if(!e) return; e.textContent=m; e.classList.add('show'); clearTimeout(e._t); e._t=setTimeout(function(){ e.classList.remove('show'); },2200); }
+
+/* taps inside a phone change only that phone */
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-act]'); if(!t) return; var col=t.closest('.tcol'); if(!col) return;
+  var i=+col.dataset.i, c=COL[i], a=t.dataset.act;
+  if(a==='open'){ c.plan='y'; go(i,'pw'); }
+  else if(a==='plan'){ c.plan=t.dataset.p; drawCol(i,true); }
+  else if(a==='tnext'){ if((c.tk||0)<3){ c.tk=(c.tk||0)+1; drawCol(i); } else toast(i,'Today: then the app'); }
+  else if(a==='buy'){ toast(i,'Apple’s purchase sheet opens here'); clearTimeout(c.bt); c.bt=setTimeout(function(){ if(c.scr!=='pw') return; go(i,'open'); toast(i,'Welcome to Storytel Unlimited.'); },1500); }
+  else if(a==='x'){ go(i,'closed'); toast(i,'Straight to Home. No second paywall.'); }
+});
+
+function fit(){ var w=document.documentElement.clientWidth||innerWidth; if(w<300) w=Math.max(w,(screen&&screen.width)||390,320); var sc=w>=1240?0.8:w>=900?(w-160)/(3*390):(w-48)/390; sc=Math.min(0.8,Math.max(0.42,sc)); $('#trio').style.setProperty('--sc',sc.toFixed(3)); }
+
+/* ---- the five ideas ---- */
+var IDEAS=[
+  {t:'Open the paywall on the ad’s promise',p:'In Mexico your ad says “12 meses a mitad de precio”; in Türkiye one sells a story for the metro, another García Márquez read by Okan Bayülgen. In the app all of them meet “Unlimited” and a feature list. Open on the promise instead: the yearly price by the month, a book playing offline, the book they came for. If the 50% exists as an App Store introductory offer, it goes in the yearly card; until then the card says your real saving.',o:'CR +15–20%',u:'expected',st:'pw',hl:'head',kept:'Kept: your orange headline, your covers, your dark player, “Ahorra 40%” in your words.'},
+  {t:'Put 4.8 from 23K ratings by the button',p:'Mexico rates Storytel 4.8 from 23K ratings, and the reviews say why: “Buen precio, buen catálogo.” None of it is on the paywall. Put the rating and one review matched to the ad under the plans, and repeat “4.8 · 23K ratings · cancel anytime” above the button.',o:'CR +10–15%',u:'expected',st:'plans',hl:'proof',kept:'Kept: your users’ words as written, in Spanish.'},
+  {t:'Tick Yearly, the plan with the free week',p:'The plan picker opens with Monthly ticked, while the 7-day free trial on your confirmation screen belongs to the yearly plan. Tick Yearly first, at $99.17 MXN a month, with the free-week tag and “Ahorra 40%” on it. Monthly stays one tap away.',o:'CR +5–15%',u:'expected',st:'plans',hl:'plans',kept:'Kept: both prices, $169 and $1,190 MXN, as your store and site publish them.'},
+  {t:'Drop the confirmation screen and its checkbox',p:'After the plan picker comes a third screen with the trial, the annual price and a terms checkbox to tick before Continue. Apple’s own sheet confirms the purchase right after. Put the terms in one line under the button and let “Try 7 days free” go straight to Apple.',o:'CR +5–8%',u:'expected',st:'plans',hl:'bill',kept:'Kept: your terms and privacy links, one tap away.'},
+  {t:'Say “cancel before the last day, pay nothing” by the button',p:'Your App Store listing promises it: if you cancel before the last day of the trial you won’t be charged. Put it on the plan as a three-step line, today $0, day 6 cancel and pay nothing, day 7 $1,190 MXN, and in the line under the button.',o:'CR +3–8%',u:'expected',st:'plans',hl:'tl',kept:'Kept: your own promise, word for word.'}
+];
+function ideaRow(d){ return '<div class="row"><span class="out">'+d.o+' <small>'+d.u+'</small></span><span class="see">See it on the phones →</span></div>'; }
+$('#ideas').innerHTML=IDEAS.map(function(d,i){ return '<div class="idea" data-idea="'+i+'"><div class="n">Idea '+(i+1)+' of 5</div><h3>'+d.t+'</h3><p>'+d.p+'</p>'+ideaRow(d)+'<div class="kept">'+d.kept+'</div></div>'; }).join('');
+$('#list').innerHTML=IDEAS.map(function(d,i){ return '<div class="it" data-idea="'+i+'"><div class="em">0'+(i+1)+'</div><div><h3>'+d.t+'</h3><p>'+d.p+'</p>'+ideaRow(d)+'</div></div>'; }).join('');
+/* your ads: three cards, each opening its phone */
+var ENC=[
+  ['i','ads/mx50.jpg','','Meta · Mexico · half price','<q>12 meses de audiolibros a mitad de precio. De $169 a solo $84.50 al mes.</q> It links to storytel.com, running since 12 November. The app shows $169.','Meta · MX'],
+  ['v','ads/metro.mp4','ads/metro.jpg','Meta · Türkiye · the metro','<q>Uzun metro yolculuklarının kurtarıcısı sesli kitaplar.</q> Audiobooks, the saviour of long metro rides. Running since 5 November.','Meta · TR'],
+  ['v','ads/marquez.mp4','ads/marquez.jpg','Meta · Türkiye · one author','Okan Bayülgen reads García Márquez’s <q>Kırmızı Pazartesi</q>, then <q>İlk 4 ay ₺164,99/ay öde</q>. Running since 24 September.','Meta · TR']
+];
+$('#entries').innerHTML=ENC.map(function(e,i){ return '<div class="en" role="button" tabindex="0" data-phone="'+i+'"><div class="pv">'+(e[0]==='v'?'<video src="'+e[1]+'" poster="'+e[2]+'" autoplay muted loop playsinline preload="metadata"></video>':'<img src="'+e[1]+'" alt="" style="object-fit:contain;background:#E9643A">')+'<span class="lk"><i></i>'+e[5]+'</span></div><h4>'+e[3]+'</h4><p>'+e[4]+'</p><u>Open its paywall</u></div>'; }).join('');
+
+function pulseEl(el){ if(!el) return; el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
+function toTrio(){ var t=$('#trio'); if(!t) return; var y=t.getBoundingClientRect().top+scrollY-(innerWidth<900?84:Math.max(84,(innerHeight-t.offsetHeight)/2)); window.scrollTo({top:Math.max(0,y),behavior:'smooth'}); }
+var HLOFF={head:200,lead:120,inc:60,proof:160,plans:60,tl:200,bill:0};
+function showIdea(n){
+  var d=IDEAS[n]; stopWalk(); showView('pw'); setStep(d.st);
+  setTimeout(function(){
+    toTrio();
+    $$('#trio [data-hl="'+d.hl+'"]').forEach(function(el){ var b=el.closest('.scr-body'); if(b) b.scrollTop=Math.max(0,offTop(el,b)-(HLOFF[d.hl]||80)); pulseEl(el); });
+  },80);
+}
+document.addEventListener('click',function(e){ var c=e.target.closest('[data-idea]'); if(c) showIdea(+c.dataset.idea); });
+document.addEventListener('click',function(e){ var c=e.target.closest('[data-phone]'); if(!c) return; var i=+c.dataset.phone; stopWalk(); showView('pw'); setStep('ad');
+  setTimeout(function(){ toTrio(); var col=$('#trio .tcol[data-i="'+i+'"]'); col.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); pulseEl($('.phone',col)); },80); });
+
+/* ---- views ---- */
+function showView(v){ $$('.view').forEach(function(x){ x.classList.remove('on'); }); $('#view-'+v).classList.add('on'); $$('.tabs button').forEach(function(b){ b.classList.toggle('on',b.dataset.v===v); });
+  if(v!=='pw') stopWalk();
+  var q=new URLSearchParams(location.search); q.delete('open'); q.delete('step'); if(v==='pw') q.set('view','proto'); else q.delete('view'); history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')); scrollTo(0,0); fit(); }
+$$('.tabs button').forEach(function(b){ b.addEventListener('click',function(){ showView(b.dataset.v); }); });
+$$('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ showView(b.dataset.open); }); });
+$$('#steps button').forEach(function(b){ b.addEventListener('click',function(){ stopWalk(); setStep(b.dataset.st,true); }); });
+$$('#theme button').forEach(function(b){ b.addEventListener('click',function(){ G.theme=b.dataset.th; $$('#theme button').forEach(function(x){ x.classList.toggle('on',x===b); }); $$('#trio .phone').forEach(function(p){ p.classList.toggle('dk',G.theme==='dark'); }); }); });
+
+/* ---- the 30-second walkthrough: drives the real phones ---- */
+var walk={on:false,tok:0};
+function wait(ms,tk){ return new Promise(function(res,rej){ setTimeout(function(){ tk===walk.tok?res():rej('stop'); },ms); }); }
+function cap(t,p){ $('#dtx').textContent=t; $('#dpr').style.width=p+'%'; }
+async function tap(i,sel,tk){
+  var col=$('#trio .tcol[data-i="'+i+'"]'), box=$('.pbox',col), el=$(sel,box), f=$('.finger',box); if(!el) return;
+  var b=box.getBoundingClientRect(), r=el.getBoundingClientRect();
+  f.classList.add('on'); f.style.left=(r.left-b.left+r.width/2)+'px'; f.style.top=(r.top-b.top+r.height/2)+'px';
+  await wait(380,tk); f.classList.add('press'); await wait(120,tk); f.classList.remove('press'); el.click(); await wait(160,tk);
+}
+async function scrollAll(sel,off,tk){ var bs=PH.map(function(p,i){ var box=$('#trio .tcol[data-i="'+i+'"] .pbox'), b=$('.scr-body',box), el=$(sel,box); return b&&el?[b,b.scrollTop,Math.max(0,offTop(el,b)-off)]:null; }).filter(Boolean), t0=performance.now();
+  while(true){ var k=Math.min(1,(performance.now()-t0)/600), e=1-Math.pow(1-k,3); bs.forEach(function(x){ x[0].scrollTop=x[1]+(x[2]-x[1])*e; }); if(k>=1) break; await wait(16,tk); } }
+function pulseAll(hl){ $$('#trio [data-hl="'+hl+'"]').forEach(pulseEl); }
+async function startWalk(){
+  stopWalk(); var tk=++walk.tok; walk.on=true; showView('pw'); $('#dcap').classList.add('on'); $('#wt').classList.add('on'); $('#wt').textContent='■ Stop walkthrough';
+  var t0=performance.now();
+  try{
+    setStep('ad'); toTrio();
+    cap('Three ads: half price for 12 months, a story for the metro, García Márquez read aloud.',8); await wait(2400,tk);
+    await tap(0,'[data-act=open]',tk); go(1,'pw'); go(2,'pw');
+    cap('The paywall opens on each promise: the yearly price by the month, a book playing offline, the book they came for.',22); pulseAll('head'); await wait(1700,tk); pulseAll('lead'); await wait(1400,tk);
+    await scrollAll('[data-hl=inc]',60,tk);
+    cap('What Unlimited includes, from your own site, led by that promise. Kids Mode when the kids listen too.',38); pulseAll('inc'); await wait(2000,tk);
+    await scrollAll('[data-hl=plans]',40,tk);
+    cap('Yearly ticked, with the free week: $99.17 MXN a month. Cancel before the last day, pay nothing.',56); pulseAll('tl'); await wait(2200,tk);
+    await tap(0,'[data-p=m]',tk); await wait(600,tk); await tap(0,'[data-p=y]',tk); await wait(300,tk);
+    var s=$('#trio .tcol[data-i="1"] [data-k=who]'); s.value='kids'; s.dispatchEvent(new Event('change',{bubbles:true}));
+    cap('Change who listens and it rewrites: every ride and every bedtime, with Kids Mode.',72); await wait(1900,tk);
+    await scrollAll('[data-hl=proof]',160,tk);
+    cap('4.8 from 23K ratings in Mexico and a real review, right under the plans.',84); pulseAll('proof'); await wait(1600,tk);
+    cap('One tap to Apple’s sheet. The X goes straight to Home. No second paywall.',94); await tap(2,'[data-act=x]',tk); await wait(400,tk); await tap(0,'[data-act=buy]',tk); await wait(1900,tk);
+    cap('That’s the screen. Every one of them buildable in Flow Builder.',100); console.log('walkthrough ms',Math.round(performance.now()-t0));
+    await wait(1200,tk); stopWalk(); setStep('pw');
+  }catch(e){}
+}
+function stopWalk(){ if(!walk.on) return; walk.on=false; walk.tok++; $('#dcap').classList.remove('on'); $('#wt').classList.remove('on'); $('#wt').textContent='▶ 30-second walkthrough'; $$('.finger').forEach(function(f){ f.classList.remove('on'); }); }
+$$('[data-walk]').forEach(function(b){ b.addEventListener('click',function(){ if(walk.on&&b.id==='wt'){ stopWalk(); return; } startWalk(); }); });
+document.addEventListener('pointerdown',function(e){ if(!walk.on||!e.isTrusted) return; if(e.target.closest('#wt')) return; if(e.target.closest('#trio,#steps,#theme,.tabs,.nav')) stopWalk(); },true);
+
+/* hero: your covers drifting up like a bookshelf */
+(function(){
+  var L=['c-onix','c-cien','c-sombra','c-ira','c-anillos','c-redondo','c-pideme','c-corte','c-escarlata','c-clare'];
+  var h=''; L.forEach(function(n,k){ h+='<img class="ls" src="img/'+n+'.jpg" alt="" style="left:'+((k%4)*25+2)+'%;animation-delay:-'+(k*2.1)+'s">'; }); $('#rise').innerHTML=h;
+})();
+
+renderTrio(); fit(); paintSteps(); addEventListener('resize',fit); addEventListener('load',fit); addEventListener('pageshow',fit); if(window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+(function(){ var q=new URLSearchParams(location.search), st=q.get('step'); if(q.get('view')==='proto'||q.get('open')==='proto') showView('pw'); if(st) setStep(st); })();
+</script>
+<script>
+/* GitHub Pages lets browsers keep this page for 10 minutes; if a newer build is live, reload onto it */
+var BUILD='b1';
+fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){ return r.text(); }).then(function(h){
+  var m=h.match(/var BUILD='([^']+)'/); if(m && m[1]!==BUILD){ var q=new URLSearchParams(location.search); q.set('v',m[1]); location.replace(location.pathname+'?'+q.toString()); }
+}).catch(function(){});
+</script>
+</body>
+</html>
